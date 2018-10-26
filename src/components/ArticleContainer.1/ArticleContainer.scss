@@ -1,0 +1,15 @@
+.article-container{
+  padding-top: 1.25rem;
+  box-sizing: border-box;
+  width: 37.5rem;
+  margin: 0 auto;
+}
+
+.article-container{
+  .article-card{
+    margin-top: 1.25rem;
+    &:nth-child(1){
+      margin-top: 0px;
+    }
+  }
+}
