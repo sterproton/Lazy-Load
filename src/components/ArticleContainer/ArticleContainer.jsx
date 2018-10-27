@@ -2,8 +2,19 @@ import React, { Component } from 'react'
 // import PropTypes from 'prop-types'
 import './ArticleContainer.scss'
 import ArticleCard from '../sharedComp/ArticleCard/ArticleCard'
+import HNProducer from '../../network/hackerNews'
 
 const waitMs = ms => new Promise(resolve => setTimeout(() => resolve(), ms))
+
+const HNAdaptor = HNItem => ({
+  ...HNItem,
+  isLoading: false,
+})
+
+const fetchNewStories = async () => {
+  const newHNStories = await HNProducer.getNewBy(10)
+  return newHNStories.map(HNAdaptor)
+}
 
 const isReachBottom = () => {
   let isReach = false
@@ -35,11 +46,11 @@ export default class ArticleContainer extends Component {
 
 
   async componentDidMount() {
-    const articleArr = await this.fetchData()
     document.body.onscroll = this.onBodyScroll
-
+    await HNProducer.initStoriesIDArr()
+    const cardInfo = await fetchNewStories()
     this.setState({
-      articleArr,
+      articleArr: cardInfo,
     })
   }
 
@@ -51,25 +62,13 @@ export default class ArticleContainer extends Component {
         })],
       }))
 
-      const data = await this.fetchData()
+      const data = await fetchNewStories()
+      console.log(data)
       const newArticleArr = [...this.state.articleArr.filter(item => item.isLoading === false), ...data]
       this.setState({
         articleArr: newArticleArr,
       })
     }
-  }
-
-
-  fetchData = async () => {
-    await waitMs(1000)
-    return new Array(10).fill({
-      title: 'No Innovation Without Representation',
-      summary: 'Why the technology gap in Congress matters, and what we can do about it',
-      authorName: 'Patrick Gothman',
-      articleDate: new Date().toTimeString(),
-      ArticleReadingTime: 13,
-      isLoading: false,
-    })
   }
 
   render() {

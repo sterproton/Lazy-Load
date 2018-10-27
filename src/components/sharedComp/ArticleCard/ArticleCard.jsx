@@ -2,6 +2,7 @@ import React from 'react'
 import './ArticleCard.scss'
 import ContentLoader from 'react-content-loader'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 
 const ArticleLoader = props => (
   <ContentLoader
@@ -19,34 +20,42 @@ const ArticleLoader = props => (
   </ContentLoader>
 )
 
+const capture60Chars = (str) => {
+  if (str.length > 60) {
+    return `${str.slice(0, 60)}...`
+  }
+  return str
+}
+
+const getPastTime = (UTCSecond) => {
+  const pastMinute = Math.floor(((new Date().getTime() / 1000) - UTCSecond) / 60)
+  console.log(pastMinute)
+  if (pastMinute < 60) {
+    return `${pastMinute} minute ago`
+  } else if (pastMinute < 120) {
+    return '1 hours ago'
+  }
+  return `${(Math.floor(pastMinute / 60))} hours ago`
+}
+
+
 const ArticleCard = (props) => {
   const { isLoading } = props
-  // const summary = 'Why the technology gap in Congress matters, and what we can do about it'
-  // const title = 'No Innovation Without Representation'
-  // const authorName = 'Patrick Gothman'
-  // const articleDate = new Date().toDateString()
-  // const ArticleReadingTime = 13
+  const ArticleReadingTime = 13
   if (isLoading) {
     return <ArticleLoader />
   }
-  const {summary, title, authorName, articleDate, ArticleReadingTime} = props
+  const {
+    title, by, url, time,
+  } = props
   return (
     <div className="article-card">
       <header>{title}</header>
-      <p className="article-summary">
-        {summary}
-      </p>
-      <div className="article-author">
-        {authorName}
-      </div>
       <div className="article-info">
-        <span>
-          {articleDate}
-        </span>
-        <span>
-          {`${ArticleReadingTime}min read`}
-        </span>
+        <span>{by}</span>
+        <span>{getPastTime(time)}</span>
       </div>
+      <div>{capture60Chars(url)}</div>
     </div>
   )
 }
