@@ -21,9 +21,6 @@ const isReachBottom = () => {
 
 
 export default class ArticleContainer extends Component {
-  // static propTypes = {
-  //   prop: PropTypes
-  // }
 
   initArticleArr = new Array(10).fill({
     isLoading: true,
