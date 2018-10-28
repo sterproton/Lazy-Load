@@ -136,7 +136,40 @@
       "node_modules/babel-loader/lib/index.js!node_modules/eslint-loader/index.js!src/utils/Wrap.js": 51,
       "node_modules/babel-loader/lib/index.js!node_modules/eslint-loader/index.js!src/components/Counter.jsx": 52,
       "node_modules/babel-loader/lib/index.js!node_modules/eslint-loader/index.js!src/components/Home.jsx": 53,
-      "node_modules/lodash-es/_freeGlobal.js": 54
+      "node_modules/lodash-es/_freeGlobal.js": 54,
+      "node_modules/axios/lib/utils.js": 1,
+      "node_modules/axios/lib/defaults.js": 10,
+      "node_modules/axios/lib/cancel/Cancel.js": 11,
+      "node_modules/axios/lib/cancel/isCancel.js": 12,
+      "node_modules/axios/lib/core/createError.js": 13,
+      "node_modules/axios/lib/adapters/xhr.js": 23,
+      "node_modules/axios/lib/helpers/bind.js": 24,
+      "node_modules/babel-loader/lib/index.js!node_modules/eslint-loader/index.js!src/index.js 756eb337c6950f5e7edf4b35f3ec4c4d": 25,
+      "node_modules/extract-text-webpack-plugin/dist/loader.js??ref--8-0!node_modules/style-loader/index.js!node_modules/css-loader/index.js??ref--8-2!node_modules/postcss-loader/lib/index.js??ref--8-3!node_modules/sass-loader/lib/loader.js!src/components/Header/Header.scss": 26,
+      "node_modules/extract-text-webpack-plugin/dist/loader.js??ref--8-0!node_modules/style-loader/index.js!node_modules/css-loader/index.js??ref--8-2!node_modules/postcss-loader/lib/index.js??ref--8-3!node_modules/sass-loader/lib/loader.js!src/components/Header/Block.scss": 27,
+      "node_modules/axios/lib/helpers/spread.js": 28,
+      "node_modules/axios/lib/cancel/CancelToken.js": 29,
+      "node_modules/axios/lib/helpers/combineURLs.js": 30,
+      "node_modules/axios/lib/helpers/isAbsoluteURL.js": 31,
+      "node_modules/axios/lib/core/transformData.js": 32,
+      "node_modules/axios/lib/core/dispatchRequest.js": 33,
+      "node_modules/axios/lib/core/InterceptorManager.js": 34,
+      "node_modules/axios/lib/helpers/cookies.js": 35,
+      "node_modules/axios/lib/helpers/btoa.js": 36,
+      "node_modules/axios/lib/helpers/isURLSameOrigin.js": 37,
+      "node_modules/axios/lib/helpers/parseHeaders.js": 38,
+      "node_modules/axios/lib/helpers/buildURL.js": 39,
+      "node_modules/axios/lib/core/enhanceError.js": 40,
+      "node_modules/axios/lib/core/settle.js": 41,
+      "node_modules/axios/lib/helpers/normalizeHeaderName.js": 42,
+      "node_modules/process/browser.js": 43,
+      "node_modules/axios/lib/core/Axios.js": 44,
+      "node_modules/is-buffer/index.js": 46,
+      "node_modules/axios/lib/axios.js": 47,
+      "node_modules/axios/index.js": 48,
+      "node_modules/extract-text-webpack-plugin/dist/loader.js??ref--8-0!node_modules/style-loader/index.js!node_modules/css-loader/index.js??ref--8-2!node_modules/postcss-loader/lib/index.js??ref--8-3!node_modules/sass-loader/lib/loader.js!src/components/sharedComp/ArticleCard/ArticleCard.scss": 49,
+      "node_modules/extract-text-webpack-plugin/dist/loader.js??ref--8-0!node_modules/style-loader/index.js!node_modules/css-loader/index.js??ref--8-2!node_modules/postcss-loader/lib/index.js??ref--8-3!node_modules/sass-loader/lib/loader.js!src/components/ArticleContainer/ArticleContainer.scss": 50,
+      "node_modules/react-content-loader/dist/react-content-loader.es.js": 51
     },
     "usedIds": {
       "0": 0,
@@ -210,11 +243,9 @@
       "0 node_modules/babel-loader/lib/index.js!node_modules/eslint-loader/index.js!src/components/Home.jsx ./Lazy.jsx": 0
     },
     "usedIds": [
-      0,
       1,
       2,
-      3,
-      5
+      3
     ]
   },
   "extract-text-webpack-plugin node_modules/extract-text-webpack-plugin/dist node_modules/css-loader/index.js??ref--8-2!node_modules/postcss-loader/lib/index.js??ref--8-3!node_modules/sass-loader/lib/loader.js!src/assets/scss/index.scss": [
@@ -259,6 +290,90 @@
         "bySource": {},
         "usedIds": [
           0
+        ]
+      }
+    }
+  ],
+  "extract-text-webpack-plugin node_modules/extract-text-webpack-plugin/dist node_modules/css-loader/index.js??ref--8-2!node_modules/postcss-loader/lib/index.js??ref--8-3!node_modules/sass-loader/lib/loader.js!src/components/ArticleContainer/ArticleContainer.scss": [
+    {
+      "modules": {
+        "byIdentifier": {
+          "node_modules/css-loader/lib/css-base.js": 0,
+          "node_modules/css-loader/index.js??ref--8-2!node_modules/postcss-loader/lib/index.js??ref--8-3!node_modules/sass-loader/lib/loader.js!src/components/ArticleContainer/ArticleContainer.scss": 1
+        },
+        "usedIds": {
+          "0": 0,
+          "1": 1
+        }
+      },
+      "chunks": {
+        "byName": {},
+        "bySource": {},
+        "usedIds": [
+          1
+        ]
+      }
+    }
+  ],
+  "extract-text-webpack-plugin node_modules/extract-text-webpack-plugin/dist node_modules/css-loader/index.js??ref--8-2!node_modules/postcss-loader/lib/index.js??ref--8-3!node_modules/sass-loader/lib/loader.js!src/components/Header/Header.scss": [
+    {
+      "modules": {
+        "byIdentifier": {
+          "node_modules/css-loader/lib/css-base.js": 0,
+          "node_modules/css-loader/index.js??ref--8-2!node_modules/postcss-loader/lib/index.js??ref--8-3!node_modules/sass-loader/lib/loader.js!src/components/Header/Header.scss": 1
+        },
+        "usedIds": {
+          "0": 0,
+          "1": 1
+        }
+      },
+      "chunks": {
+        "byName": {},
+        "bySource": {},
+        "usedIds": [
+          1
+        ]
+      }
+    }
+  ],
+  "extract-text-webpack-plugin node_modules/extract-text-webpack-plugin/dist node_modules/css-loader/index.js??ref--8-2!node_modules/postcss-loader/lib/index.js??ref--8-3!node_modules/sass-loader/lib/loader.js!src/components/Header/Block.scss": [
+    {
+      "modules": {
+        "byIdentifier": {
+          "node_modules/css-loader/lib/css-base.js": 0,
+          "node_modules/css-loader/index.js??ref--8-2!node_modules/postcss-loader/lib/index.js??ref--8-3!node_modules/sass-loader/lib/loader.js!src/components/Header/Block.scss": 1
+        },
+        "usedIds": {
+          "0": 0,
+          "1": 1
+        }
+      },
+      "chunks": {
+        "byName": {},
+        "bySource": {},
+        "usedIds": [
+          1
+        ]
+      }
+    }
+  ],
+  "extract-text-webpack-plugin node_modules/extract-text-webpack-plugin/dist node_modules/css-loader/index.js??ref--8-2!node_modules/postcss-loader/lib/index.js??ref--8-3!node_modules/sass-loader/lib/loader.js!src/components/sharedComp/ArticleCard/ArticleCard.scss": [
+    {
+      "modules": {
+        "byIdentifier": {
+          "node_modules/css-loader/lib/css-base.js": 0,
+          "node_modules/css-loader/index.js??ref--8-2!node_modules/postcss-loader/lib/index.js??ref--8-3!node_modules/sass-loader/lib/loader.js!src/components/sharedComp/ArticleCard/ArticleCard.scss": 1
+        },
+        "usedIds": {
+          "0": 0,
+          "1": 1
+        }
+      },
+      "chunks": {
+        "byName": {},
+        "bySource": {},
+        "usedIds": [
+          1
         ]
       }
     }

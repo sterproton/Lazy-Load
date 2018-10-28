@@ -1,9 +1,9 @@
 .article-card{
-  // width: 34.375rem;
-  // height: 125px;
   box-sizing: border-box;
   padding: 15px;
   box-shadow: 0px .5px 1px 0px grey;
+  background-color: white;
+  cursor: pointer;
   header{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;

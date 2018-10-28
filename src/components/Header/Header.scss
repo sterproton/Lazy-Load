@@ -1,0 +1,19 @@
+.header{
+  background-color: rgb(255, 102, 0);
+  position: fixed;
+  width: 100%;
+}
+
+.block-wrap{
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+}
+
+.header-img{
+  position: absolute;
+  height: 100%;
+  img{
+    height: 100%;
+  }
+}

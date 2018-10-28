@@ -46,6 +46,8 @@
       "comma-spacing": 1,
       "no-empty": 1,
       "space-infix-ops": 1,
-      "class-methods-use-this": 0
+      "class-methods-use-this": 1,
+      "jsx-a11y/click-events-have-key-events": 1,
+      "jsx-a11y/no-static-element-interactions": 1
   }
 }

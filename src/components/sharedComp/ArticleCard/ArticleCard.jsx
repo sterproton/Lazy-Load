@@ -2,27 +2,27 @@ import React from 'react'
 import './ArticleCard.scss'
 import ContentLoader from 'react-content-loader'
 import PropTypes from 'prop-types'
-import moment from 'moment'
 
 const ArticleLoader = props => (
   <ContentLoader
     rtl
-    height={125}
-    width={550}
+    height={100}
+    width={770}
     speed={2}
     primaryColor="#f3f3f3"
     secondaryColor="#ecebeb"
     {...props}
   >
-    <rect x="14" y="25" rx="3" ry="3" width="350" height="6.4" />
-    <rect x="11" y="65" rx="3" ry="3" width="380" height="6.4" />
+    <rect x="11" y="13.84" rx="3" ry="3" width="640.5" height="13.18" />
+    <rect x="11.91" y="48.31" rx="3" ry="3" width="231.8" height="9.41" />
     <rect x="16" y="108" rx="3" ry="3" width="201" height="6.4" />
+    <rect x="11" y="75.36" rx="3" ry="3" width="619.4" height="9.28" />
   </ContentLoader>
 )
 
-const capture60Chars = (str) => {
-  if (str.length > 60) {
-    return `${str.slice(0, 60)}...`
+const capture80Chars = (str) => {
+  if (str.length > 80) {
+    return `${str.slice(0, 80)}...`
   }
   return str
 }
@@ -43,19 +43,29 @@ const ArticleCard = (props) => {
   const { isLoading } = props
   const ArticleReadingTime = 13
   if (isLoading) {
-    return <ArticleLoader />
+    return (
+      <div className="article-card">
+        <ArticleLoader />
+      </div>
+    )
   }
+
+  const clickToURL = URL => () => {
+    document.location.href = URL
+  }
+
   const {
     title, by, url, time,
   } = props
+
   return (
-    <div className="article-card">
+    <div className="article-card" onClick={clickToURL(url)}>
       <header>{title}</header>
       <div className="article-info">
         <span>{by}</span>
         <span>{getPastTime(time)}</span>
       </div>
-      <div>{capture60Chars(url)}</div>
+      {url ? (<div>{capture80Chars(url)}</div>) : null}
     </div>
   )
 }
@@ -65,4 +75,3 @@ ArticleCard.propTyes = {
 }
 
 export default ArticleCard
-

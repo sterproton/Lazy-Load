@@ -11,12 +11,13 @@ module.exports = merge(webpackCommonConfig, {
     new ErrorOverlayPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      title: "webpack-boilerplate",
+      title: "My Hacker News",
       template: path.resolve(__dirname, '../src/template/index.html'),
       minify: { //压缩HTML文件
         removeComments: true, //移除HTML中的注释
         collapseWhitespace: true //删除空白符与换行符
-      }
+      },
+      favicon: path.resolve(__dirname, '../favicon.ico')
     }),
   ],
   devServer: {
