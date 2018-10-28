@@ -1,6 +1,6 @@
 const path = require('path')
 const rootPath = path.resolve(__dirname)
-const entryPath = path.resolve(rootPath, "../src/index.js")
+const entryPath = path.resolve(rootPath, "../src/index.jsx")
 const outputPath = path.resolve(rootPath, "../dist")
 const srcPath = path.resolve(rootPath, "../src")
 // const HappyPack = require("happypack")

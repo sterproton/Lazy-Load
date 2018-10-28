@@ -4,18 +4,11 @@ const HNAPI = {
   topStories: 'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty',
   newStories: 'https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty',
   bestStories: 'https://hacker-news.firebaseio.com/v0/beststories.json?print=pretty',
+  ask: 'https://hacker-news.firebaseio.com/v0/askstories.json?print=pretty',
+  show: 'https://hacker-news.firebaseio.com/v0/showstories.json?print=pretty',
+  job: 'https://hacker-news.firebaseio.com/v0/jobstories.json?print=pretty',
 }
 
-
-// export const getItemInfoByID = async itemID => axios.get(`https://hacker-news.firebaseio.com/v0/item/${itemID}.json?print=pretty`)
-// export const getUserInfoByUserID = async userID => axios.get(`https://hacker-news.firebaseio.com/v0/user/${userID}.json?print=pretty`)
-
-// export const fetchNewStoriesIDs = async () => axios.get(HNAPI.topStories)
-// export const fetchTopStoriesIDs = async () => axios.get(HNAPI.topStories)
-// export const fetchBestStoriesIDs = async () => axios.get(HNAPI.bestStories)
-
-
-let newStoriesIDArr = []
 
 const fetchItemInfoByID = async (itemID) => {
   const { data } = await axios.get(`https://hacker-news.firebaseio.com/v0/item/${itemID}.json?print=pretty`)
@@ -27,38 +20,103 @@ const fetchUserInfoByUserID = async (userID) => {
   return data
 }
 
-
-const fetchNewStoriesIDs = async () => {
-  const { data } = await axios.get(HNAPI.topStories)
-  return data
-}
-
-const fetchTopStoriesIDs = async () => {
-  const { data } = await axios.get(HNAPI.topStories)
-  return data
-}
-
-const fetchBestStoriesIDs = async () => {
-  const { data } = await axios.get(HNAPI.bestStories)
-  return data
-}
-
 const fetchItemsByIDs = async itemIDs => Promise
   .all(itemIDs.map(itemID => fetchItemInfoByID(itemID)))
 
-const getNewBy = async (num) => {
+/**
+ * 在文件模块内部保存的ID队列，用来分页用，当ID代表的Item被fetch后，Array会pop掉相应的数个ID
+ * 如果Arr长度为零，则再获取数据就返回[],应在获得数据时进行判断。
+ */
+let newStoriesIDArr = []
+let topStoriesIDArr = []
+let bestStoriesIDArr = []
+let latestAsksIDArr = []
+let latestShowsIDArr = []
+let latestJobsIDArr = []
+
+const initNewStoriesIDArr = async () => {
+  const { data } = await axios.get(HNAPI.newStories)
+  newStoriesIDArr = data
+}
+
+const initTopStoriesIDArr = async () => {
+  const { data } = await axios.get(HNAPI.topStories)
+  topStoriesIDArr = data
+}
+
+const initBestStoriesIDArr = async () => {
+  const { data } = await axios.get(HNAPI.bestStories)
+  bestStoriesIDArr = data
+}
+
+const initLatestAsksIDArr = async () => {
+  const { data } = axios.get(HNAPI.ask)
+  latestAsksIDArr = data
+}
+
+const initLatestShowsIDArr = async () => {
+  const { data } = axios.get(HNAPI.show)
+  latestShowsIDArr = data
+}
+
+const initLatestJobIDArr = async () => {
+  const { data } = axios.get(HNAPI.job)
+  latestJobsIDArr = data
+}
+
+
+const fetchNewByStep = async (num) => {
+  if (newStoriesIDArr.length === 0) {
+    
+  }
   const IDs = newStoriesIDArr.splice(0, num)
   const ret = await fetchItemsByIDs(IDs)
   return ret
 }
 
-const initStoriesIDArr = async () => {
-  newStoriesIDArr = await fetchNewStoriesIDs()
+const fetchTopByStep = async (num) => {
+  const IDs = topStoriesIDArr.splice(0, num)
+  const ret = await fetchItemsByIDs(IDs)
+  return ret
+}
+
+const fetchBestByStep = async (num) => {
+  const IDs = bestStoriesIDArr.splice(0, num)
+  const ret = await fetchItemsByIDs(IDs)
+  return ret
+}
+
+const fetchAskByStep = async (num) => {
+  const IDs = latestAsksIDArr.splice(0, num)
+  const ret = await fetchItemsByIDs(IDs)
+  return ret
+}
+
+const fetchShowByStep = async (num) => {
+  const IDs = latestShowsIDArr.splice(0, num)
+  const ret = await fetchItemsByIDs(IDs)
+  return ret
+}
+
+const fetchJobByStep = async (num) => {
+  const IDs = latestJobsIDArr.splice(0, num)
+  const ret = await fetchItemsByIDs(IDs)
+  return ret
 }
 
 const HNProducer = {
-  initStoriesIDArr,
-  getNewBy,
+  initNewStoriesIDArr,
+  fetchNewByStep,
+  initTopStoriesIDArr,
+  fetchTopByStep,
+  initBestStoriesIDArr,
+  fetchBestByStep,
+  initLatestAsksIDArr,
+  fetchAskByStep,
+  initLatestShowsIDArr,
+  fetchShowByStep,
+  initLatestJobIDArr,
+  fetchJobByStep,
 }
 
 export default HNProducer

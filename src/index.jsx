@@ -1,4 +1,4 @@
-// import React from 'react'
+import React from 'react'
 import reactDom from 'react-dom'
 import App from './components/App'
 
@@ -8,4 +8,4 @@ if (module.hot) {
   module.hot.accept()
 }
 
-reactDom.render(App, appEle)
+reactDom.render(<App />, appEle)

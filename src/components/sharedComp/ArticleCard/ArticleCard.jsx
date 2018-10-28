@@ -29,7 +29,6 @@ const capture80Chars = (str) => {
 
 const getPastTime = (UTCSecond) => {
   const pastMinute = Math.floor(((new Date().getTime() / 1000) - UTCSecond) / 60)
-  console.log(pastMinute)
   if (pastMinute < 60) {
     return `${pastMinute} minute ago`
   } else if (pastMinute < 120) {

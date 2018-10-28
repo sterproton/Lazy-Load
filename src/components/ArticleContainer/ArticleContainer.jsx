@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
-// import PropTypes from 'prop-types'
 import './ArticleContainer.scss'
 import ArticleCard from '../sharedComp/ArticleCard/ArticleCard'
 import HNProducer from '../../network/hackerNews'
-
-const waitMs = ms => new Promise(resolve => setTimeout(() => resolve(), ms))
 
 const HNAdaptor = HNItem => ({
   ...HNItem,
@@ -12,7 +9,7 @@ const HNAdaptor = HNItem => ({
 })
 
 const fetchNewStories = async () => {
-  const newHNStories = await HNProducer.getNewBy(10)
+  const newHNStories = await HNProducer.fetchNewByStep(10)
   return newHNStories.map(HNAdaptor)
 }
 
@@ -47,7 +44,7 @@ export default class ArticleContainer extends Component {
 
   async componentDidMount() {
     document.body.onscroll = this.onBodyScroll
-    await HNProducer.initStoriesIDArr()
+    await HNProducer.initNewStoriesIDArr()
     const cardInfo = await fetchNewStories()
     this.setState({
       articleArr: cardInfo,
