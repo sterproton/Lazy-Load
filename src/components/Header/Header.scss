@@ -8,6 +8,15 @@
   display: flex;
   flex-flow: wrap;
   justify-content: center;
+  a{
+    display: block;
+    color: white;
+    padding: 0.9375rem;
+    font-size: 1.5rem;
+    &:hover{
+      background-color: rgb(253, 129, 47);
+    }
+  }
 }
 
 .header-img{
