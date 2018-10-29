@@ -43,7 +43,7 @@ export default class ArticleContainer extends Component {
 
 
   async componentDidMount() {
-    document.body.onscroll = this.onBodyScroll
+    window.addEventListener('scroll', this.onBodyScroll, false)
     await HNProducer.initNewStoriesIDArr()
     const cardInfo = await fetchNewStories()
     this.setState({
@@ -60,11 +60,13 @@ export default class ArticleContainer extends Component {
       }))
 
       const data = await fetchNewStories()
-      console.log(data)
-      const newArticleArr = [...this.state.articleArr.filter(item => item.isLoading === false), ...data]
-      this.setState({
-        articleArr: newArticleArr,
-      })
+      this.setState((prevState) => {
+        const newArticleArr = [...prevState.articleArr.filter(item => item.isLoading === false), ...data]
+        return {
+          articleArr: newArticleArr,
+        }
+      },
+      )
     }
   }
 
@@ -77,4 +79,3 @@ export default class ArticleContainer extends Component {
     )
   }
 }
-

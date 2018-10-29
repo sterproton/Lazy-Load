@@ -120,4 +120,3 @@ const HNProducer = {
 }
 
 export default HNProducer
-
