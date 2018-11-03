@@ -58,13 +58,15 @@ const ArticleCard = (props) => {
   } = props
 
   return (
-    <div className="article-card" onClick={clickToURL(url)}>
-      <header>{title}</header>
+    <div className="article-card">
+      <header>
+        <a href={url} target="_blank" rel="noopener noreferrer">{title}</a>
+      </header>
       <div className="article-info">
         <span>{by}</span>
         <span>{getPastTime(time)}</span>
       </div>
-      {url ? (<div>{capture80Chars(url)}</div>) : null}
+      {url ? (<div><a href={url} target="_blank" rel="noopener noreferrer">{capture80Chars(url)}</a></div>) : null }
     </div>
   )
 }

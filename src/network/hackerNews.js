@@ -39,84 +39,98 @@ const initNewStoriesIDArr = async () => {
   newStoriesIDArr = data
 }
 
-const initTopStoriesIDArr = async () => {
-  const { data } = await axios.get(HNAPI.topStories)
-  topStoriesIDArr = data
+const HNInit = async () => {
+  newStoriesIDArr = (await axios.get(HNAPI.newStories)).data
+  topStoriesIDArr = (await axios.get(HNAPI.topStories)).data
+  bestStoriesIDArr = (await axios.get(HNAPI.bestStories)).data
+  latestAsksIDArr = (await axios.get(HNAPI.ask)).data
+  latestShowsIDArr = (await axios.get(HNAPI.show)).data
+  latestJobsIDArr = (await axios.get(HNAPI.job)).data
 }
 
-const initBestStoriesIDArr = async () => {
-  const { data } = await axios.get(HNAPI.bestStories)
-  bestStoriesIDArr = data
+// const initTopStoriesIDArr = async () => {
+//   const { data } = await axios.get(HNAPI.topStories)
+//   topStoriesIDArr = data
+// }
+
+// const initBestStoriesIDArr = async () => {
+//   const { data } = await axios.get(HNAPI.bestStories)
+//   bestStoriesIDArr = data
+// }
+
+// const initLatestAsksIDArr = async () => {
+//   const { data } = axios.get(HNAPI.ask)
+//   latestAsksIDArr = data
+// }
+
+// const initLatestShowsIDArr = async () => {
+//   const { data } = axios.get(HNAPI.show)
+//   latestShowsIDArr = data
+// }
+
+// const initLatestJobIDArr = async () => {
+//   const { data } = axios.get(HNAPI.job)
+//   latestJobsIDArr = data
+// }
+
+
+// const fetchNewByStep = async (num) => {
+//   const IDs = newStoriesIDArr.splice(0, num)
+//   const ret = await fetchItemsByIDs(IDs)
+//   return ret
+// }
+
+// const fetchTopByStep = async (num) => {
+//   const IDs = topStoriesIDArr.splice(0, num)
+//   const ret = await fetchItemsByIDs(IDs)
+//   return ret
+// }
+
+// const fetchBestByStep = async (num) => {
+//   const IDs = bestStoriesIDArr.splice(0, num)
+//   const ret = await fetchItemsByIDs(IDs)
+//   return ret
+// }
+
+// const fetchAskByStep = async (num) => {
+//   const IDs = latestAsksIDArr.splice(0, num)
+//   const ret = await fetchItemsByIDs(IDs)
+//   return ret
+// }
+
+// const fetchShowByStep = async (num) => {
+//   const IDs = latestShowsIDArr.splice(0, num)
+//   const ret = await fetchItemsByIDs(IDs)
+//   return ret
+// }
+
+// const fetchJobByStep = async (num) => {
+//   const IDs = latestJobsIDArr.splice(0, num)
+//   const ret = await fetchItemsByIDs(IDs)
+//   return ret
+// }
+
+
+const mapCategoryToIDArr = {
+  new: () => newStoriesIDArr,
+  top: () => topStoriesIDArr,
+  best: () => bestStoriesIDArr,
+  show: () => latestShowsIDArr,
+  ask: () => latestAsksIDArr,
+  jobs: () => latestJobsIDArr,
 }
 
-const initLatestAsksIDArr = async () => {
-  const { data } = axios.get(HNAPI.ask)
-  latestAsksIDArr = data
-}
-
-const initLatestShowsIDArr = async () => {
-  const { data } = axios.get(HNAPI.show)
-  latestShowsIDArr = data
-}
-
-const initLatestJobIDArr = async () => {
-  const { data } = axios.get(HNAPI.job)
-  latestJobsIDArr = data
-}
-
-
-const fetchNewByStep = async (num) => {
-  if (newStoriesIDArr.length === 0) {
-    
-  }
-  const IDs = newStoriesIDArr.splice(0, num)
-  const ret = await fetchItemsByIDs(IDs)
-  return ret
-}
-
-const fetchTopByStep = async (num) => {
-  const IDs = topStoriesIDArr.splice(0, num)
-  const ret = await fetchItemsByIDs(IDs)
-  return ret
-}
-
-const fetchBestByStep = async (num) => {
-  const IDs = bestStoriesIDArr.splice(0, num)
-  const ret = await fetchItemsByIDs(IDs)
-  return ret
-}
-
-const fetchAskByStep = async (num) => {
-  const IDs = latestAsksIDArr.splice(0, num)
-  const ret = await fetchItemsByIDs(IDs)
-  return ret
-}
-
-const fetchShowByStep = async (num) => {
-  const IDs = latestShowsIDArr.splice(0, num)
-  const ret = await fetchItemsByIDs(IDs)
-  return ret
-}
-
-const fetchJobByStep = async (num) => {
-  const IDs = latestJobsIDArr.splice(0, num)
+const fetchStoryByStep = async (category, step) => {
+  const currentArr = mapCategoryToIDArr[category]()
+  const IDs = currentArr.splice(0, step)
+  console.log(IDs)
   const ret = await fetchItemsByIDs(IDs)
   return ret
 }
 
 const HNProducer = {
-  initNewStoriesIDArr,
-  fetchNewByStep,
-  initTopStoriesIDArr,
-  fetchTopByStep,
-  initBestStoriesIDArr,
-  fetchBestByStep,
-  initLatestAsksIDArr,
-  fetchAskByStep,
-  initLatestShowsIDArr,
-  fetchShowByStep,
-  initLatestJobIDArr,
-  fetchJobByStep,
+  HNInit,
+  fetchStoryByStep,
 }
 
 export default HNProducer

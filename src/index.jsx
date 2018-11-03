@@ -1,11 +1,15 @@
 import React from 'react'
 import reactDom from 'react-dom'
-import App from './components/App'
+import { BrowserRouter } from 'react-router-dom'
+import App from './components/App1'
 
 const appEle = document.getElementById('app')
 if (module.hot) {
   reactDom.unmountComponentAtNode(appEle)
   module.hot.accept()
 }
-
-reactDom.render(<App />, appEle)
+reactDom.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  appEle)
