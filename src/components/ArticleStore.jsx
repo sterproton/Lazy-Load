@@ -43,14 +43,14 @@ const stateAfterUpdateCategoryArticleArr = (state, currentCategory, articleArr) 
 
 const stateAfterAddFetchedData = (prevState, currentCategory, fetchedData, loadingDatasIndex) => {
   const newArticleArr = prevState.store[currentCategory].map(replaceCorrespond(fetchedData, loadingDatasIndex, fetchedData.length))
-  return stateAfterUpdateCategoryArticleArr(prevState,currentCategory, newArticleArr)
+  return stateAfterUpdateCategoryArticleArr(prevState, currentCategory, newArticleArr)
 }
 
 const stateAfterAddLoadingData = (prevState, currentCategory) => {
   const newArticleArr = [...prevState.store[currentCategory], ...new Array(10).fill({
     isLoading: true,
   })]
-  return stateAfterUpdateCategoryArticleArr(prevState,currentCategory, newArticleArr)
+  return stateAfterUpdateCategoryArticleArr(prevState, currentCategory, newArticleArr)
 }
 
 const getPathFromLocation = location => location.pathname.split('/')[1] || 'new'
@@ -62,11 +62,30 @@ class ArticleStore extends Component {
 
   state = {
     store: {
-      new: [],
-      ask: [],
-      show: [],
-      jobs: [],
+      new: new Array(10).fill({
+        isLoading: true,
+      }),
+      ask: new Array(10).fill({
+        isLoading: true,
+      }),
+      show: new Array(10).fill({
+        isLoading: true,
+      }),
+      jobs: new Array(10).fill({
+        isLoading: true,
+      }),
     },
+  }
+
+  fetchAndSetOther = async (arr, current) => {
+    const otherArr = arr.filter(item => item !== current)
+    const datas = await Promise.all(otherArr.map(item => fetchStoryByCategory(item)))
+    otherArr.forEach((category, index) => this.setState(prevState => ({
+      store: {
+        ...prevState.store,
+        [category]: datas[index],
+      },
+    })))
   }
 
   componentDidMount = async () => {
@@ -76,6 +95,7 @@ class ArticleStore extends Component {
     let cardInfo
     try {
       cardInfo = await fetchStoryByCategory(currentCategory)
+      this.fetchAndSetOther(['new', 'jobs', 'show', 'ask'], currentCategory)
     } catch (error) {
       console.log(error)
     }
@@ -104,5 +124,6 @@ class ArticleStore extends Component {
     )
   }
 }
+
 
 export default ArticleStore

@@ -33,8 +33,10 @@ const getPastTime = (UTCSecond) => {
     return `${pastMinute} minute ago`
   } if (pastMinute < 120) {
     return '1 hours ago'
+  } if(pastMinute < 1440) {
+    return `${(Math.floor(pastMinute / 60))} hours ago`
   }
-  return `${(Math.floor(pastMinute / 60))} hours ago`
+  return `${Math.floor(pastMinute / 1440)} days ago`
 }
 
 
