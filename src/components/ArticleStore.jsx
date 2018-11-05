@@ -42,7 +42,8 @@ const stateAfterUpdateCategoryArticleArr = (state, currentCategory, articleArr) 
 }
 
 const stateAfterAddFetchedData = (prevState, currentCategory, fetchedData, loadingDatasIndex) => {
-  const newArticleArr = prevState.store[currentCategory].map(replaceCorrespond(fetchedData, loadingDatasIndex, fetchedData.length))
+  const newArticleArr = prevState.store[currentCategory]
+    .map(replaceCorrespond(fetchedData, loadingDatasIndex, fetchedData.length))
   return stateAfterUpdateCategoryArticleArr(prevState, currentCategory, newArticleArr)
 }
 

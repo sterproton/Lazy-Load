@@ -2,10 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './Header.scss'
 
-const Header = (props) => {
+const Header = () => {
   const blocks = ['new', 'show', 'ask', 'jobs']
 
-  const scrollToTop = e => window.scrollTo(0,0)
+  const scrollToTop = () => window.scrollTo(0, 0)
 
   return (
     <div className="header">

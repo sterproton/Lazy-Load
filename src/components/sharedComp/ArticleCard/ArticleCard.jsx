@@ -1,7 +1,6 @@
 import React from 'react'
 import './ArticleCard.scss'
 import ContentLoader from 'react-content-loader'
-import PropTypes from 'prop-types'
 
 const ArticleLoader = props => (
   <ContentLoader
@@ -33,7 +32,7 @@ const getPastTime = (UTCSecond) => {
     return `${pastMinute} minute ago`
   } if (pastMinute < 120) {
     return '1 hours ago'
-  } if(pastMinute < 1440) {
+  } if (pastMinute < 1440) {
     return `${(Math.floor(pastMinute / 60))} hours ago`
   }
   return `${Math.floor(pastMinute / 1440)} days ago`
@@ -42,7 +41,6 @@ const getPastTime = (UTCSecond) => {
 
 const ArticleCard = (props) => {
   const { isLoading } = props
-  const ArticleReadingTime = 13
   if (isLoading) {
     return (
       <div className="article-card">
@@ -71,10 +69,6 @@ const ArticleCard = (props) => {
       {url ? (<div><a href={url} target="_blank" rel="noopener noreferrer">{capture80Chars(url)}</a></div>) : null }
     </div>
   )
-}
-
-ArticleCard.propTyes = {
-  isLoading: PropTypes.bool,
 }
 
 export default ArticleCard
