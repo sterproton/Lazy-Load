@@ -30,18 +30,18 @@ const fetchItemsByIDs = async itemIDs => Promise
 let newStoriesIDArr = []
 let topStoriesIDArr = []
 let bestStoriesIDArr = []
-let latestAsksIDArr = []
-let latestShowsIDArr = []
-let latestJobsIDArr = []
+let asksIDArr = []
+let showsIDArr = []
+let jobsIDArr = []
 
 const HNInit = async () => {
   [
     { data: newStoriesIDArr },
     { data: topStoriesIDArr },
     { data: bestStoriesIDArr },
-    { data: latestAsksIDArr },
-    { data: latestShowsIDArr },
-    { data: latestJobsIDArr },
+    { data: asksIDArr },
+    { data: showsIDArr },
+    { data: jobsIDArr },
   ] = (await Promise.all(['new', 'top', 'best', 'ask', 'show', 'job'].map(item => axios.get(HNAPI[item]))))
 }
 
@@ -50,9 +50,9 @@ const mapCategoryToIDArr = {
   new: () => newStoriesIDArr,
   top: () => topStoriesIDArr,
   best: () => bestStoriesIDArr,
-  show: () => latestShowsIDArr,
-  ask: () => latestAsksIDArr,
-  jobs: () => latestJobsIDArr,
+  show: () => showsIDArr,
+  ask: () => asksIDArr,
+  jobs: () => jobsIDArr,
 }
 
 const fetchStoryByStep = async (category, step) => {
@@ -62,9 +62,12 @@ const fetchStoryByStep = async (category, step) => {
   return ret
 }
 
+const getIDArrLengthByCategory = category => mapCategoryToIDArr[category]().length
+
 const HNProducer = {
   HNInit,
   fetchStoryByStep,
+  getIDArrLengthByCategory,
 }
 
 export default HNProducer

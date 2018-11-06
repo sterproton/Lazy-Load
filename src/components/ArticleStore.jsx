@@ -20,35 +20,34 @@ const isReachBottom = () => {
 }
 
 
-const HNAdaptor = HNItem => ({
-  ...HNItem,
-  isLoading: false,
-})
-
-const fetchStoryByCategory = async (category) => {
-  const stories = await HNProducer.fetchStoryByStep(category, 10)
-  return stories.map(HNAdaptor)
+const fetchStoryByCategory = async (category, num) => {
+  const adaptor = HNItem => ({
+    ...HNItem,
+    isLoading: false,
+  })
+  const stories = await HNProducer.fetchStoryByStep(category, num)
+  return stories.map(adaptor)
 }
 
-const stateAfterUpdateCategoryArticleArr = (state, currentCategory, articleArr) => {
+const stateAfterUpdateCategoryArticleArr = (state, currentCategory, newArticleArr) => {
   const { store } = state
   const ret = {
     store: {
       ...store,
-      [currentCategory]: [...articleArr],
+      [currentCategory]: [...newArticleArr],
     },
   }
   return ret
 }
 
-const stateAfterAddFetchedData = (prevState, currentCategory, fetchedData, loadingDatasIndex) => {
+const stateAfterAddFetchedData = (prevState, currentCategory, fetchedData, loadingDataIndex) => {
   const newArticleArr = prevState.store[currentCategory]
-    .map(replaceCorrespond(fetchedData, loadingDatasIndex, fetchedData.length))
+    .map(replaceCorrespond(fetchedData, loadingDataIndex, fetchedData.length))
   return stateAfterUpdateCategoryArticleArr(prevState, currentCategory, newArticleArr)
 }
 
-const stateAfterAddLoadingData = (prevState, currentCategory) => {
-  const newArticleArr = [...prevState.store[currentCategory], ...new Array(10).fill({
+const stateAfterAddLoadingData = (prevState, currentCategory, num) => {
+  const newArticleArr = [...prevState.store[currentCategory], ...new Array(num).fill({
     isLoading: true,
   })]
   return stateAfterUpdateCategoryArticleArr(prevState, currentCategory, newArticleArr)
@@ -78,13 +77,13 @@ class ArticleStore extends Component {
     },
   }
 
-  fetchAndSetOther = async (arr, current) => {
+  fetchAndSetOtherCategoryInitData = async (arr, current) => {
     const otherArr = arr.filter(item => item !== current)
-    const datas = await Promise.all(otherArr.map(item => fetchStoryByCategory(item)))
+    const data = await Promise.all(otherArr.map(item => fetchStoryByCategory(item, 10)))
     otherArr.forEach((category, index) => this.setState(prevState => ({
       store: {
         ...prevState.store,
-        [category]: datas[index],
+        [category]: data[index],
       },
     })))
   }
@@ -95,8 +94,10 @@ class ArticleStore extends Component {
     await HNProducer.HNInit()
     let cardInfo
     try {
-      cardInfo = await fetchStoryByCategory(currentCategory)
-      this.fetchAndSetOther(['new', 'jobs', 'show', 'ask'], currentCategory)
+      const leftHNItemLength = HNProducer.getIDArrLengthByCategory(currentCategory)
+      const fetchNum = leftHNItemLength > 10 ? 10 : leftHNItemLength
+      cardInfo = await fetchStoryByCategory(currentCategory, fetchNum)
+      this.fetchAndSetOtherCategoryInitData(['new', 'jobs', 'show', 'ask'], currentCategory)
     } catch (error) {
       console.log(error)
     }
@@ -105,23 +106,26 @@ class ArticleStore extends Component {
 
   handleScroll = async () => {
     const currentCategory = getPathFromLocation(this.props.location)
-    const loadingDatasIndex = this.state.store[currentCategory].length
+    const { store: { [currentCategory]: { length: loadingDataIndex } } } = this.state
     if (isReachBottom()) {
-      this.setState(prevState => stateAfterAddLoadingData(prevState, currentCategory))
+      const leftHNItemLength = HNProducer.getIDArrLengthByCategory(currentCategory)
+      const fetchNum = leftHNItemLength > 10 ? 10 : leftHNItemLength
+      this.setState(prevState => stateAfterAddLoadingData(prevState, currentCategory, fetchNum))
       let fetchedData = null
       try {
-        fetchedData = await fetchStoryByCategory(currentCategory)
-      } catch (e) {
-        console.log('net work err')
+        fetchedData = await fetchStoryByCategory(currentCategory, fetchNum)
+      } catch (error) {
+        console.log('net work err', error)
       }
-      this.setState(prevState => stateAfterAddFetchedData(prevState, currentCategory, fetchedData, loadingDatasIndex))
+      this.setState(prevState => stateAfterAddFetchedData(prevState, currentCategory, fetchedData, loadingDataIndex))
     }
   }
 
   render() {
     const path = getPathFromLocation(this.props.location)
+    const { store: { [path]: articleArr } } = this.state
     return (
-      <ArticleContainer articleArr={this.state.store[path]} />
+      <ArticleContainer articleArr={articleArr} />
     )
   }
 }

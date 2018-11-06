@@ -49,6 +49,10 @@ const ArticleCard = (props) => {
     )
   }
 
+  if (!props.title) {
+    return null
+  }
+
   const clickToURL = URL => () => {
     document.location.href = URL
   }
