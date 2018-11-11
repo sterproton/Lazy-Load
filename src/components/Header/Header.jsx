@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import './Header.scss'
 
 const Header = () => {
@@ -8,12 +8,12 @@ const Header = () => {
   const scrollToTop = () => window.scrollTo(0, 0)
 
   return (
-    <div className="header">
+    <header className="header">
       <div className="header-img"><img src="https://news.ycombinator.com/favicon.ico" alt="" /></div>
       <div className="block-wrap">
-        {blocks.map(content => <Link onClick={scrollToTop} key={content} to={`/${content}`}>{content}</Link>)}
+        {blocks.map(content => <NavLink activeClassName="active-header" onClick={scrollToTop} key={content} to={`/${content}`}>{content}</NavLink>)}
       </div>
-    </div>
+    </header>
   )
 }
 

@@ -1,14 +1,15 @@
 .article-container{
   padding-top: 1.25rem;
   box-sizing: border-box;
-  width: 50rem;
+  width: 80%;
+  max-width: 55rem;
   margin: 0 auto;
-  padding-top: 5rem;
+  padding-top: 6rem;
 }
 
 .article-container{
   .article-card{
-    margin-top: 1.25rem;
+    margin: 1.25rem 0;
     &:nth-child(1){
       margin-top: 0px;
     }

@@ -1,5 +1,17 @@
 # My Hacker News
 
+### introduction
+
 A Rough Hacker News website Driven By Hacker News API, developed by React stack
 
-just for practice my skill. the news feed is infinite scroll down
+just for practice my skill.
+
+### How to use
+
+- npm install
+- npm install serve
+- npm build
+- serve dist
+
+### image
+

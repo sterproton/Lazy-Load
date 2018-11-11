@@ -8,6 +8,11 @@
     font-weight: bold;
     font-size: 1.375rem;
     cursor: pointer;
+    a{
+      &:hover{
+        color: #ff6600
+      }
+    }
   }
   .article-summary{
     color: rgba(0,0,0,.54);
@@ -20,6 +25,15 @@
       &:nth-child(2){
         margin-left: 0.625rem;
       }
+    }
+  }
+  .article-url{
+    a{
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+      width: 100%;
+      white-space: nowrap;
     }
   }
 

@@ -19,13 +19,6 @@ const ArticleLoader = props => (
   </ContentLoader>
 )
 
-const capture80Chars = (str) => {
-  if (str.length > 80) {
-    return `${str.slice(0, 80)}...`
-  }
-  return str
-}
-
 const getPastTime = (UTCSecond) => {
   const pastMinute = Math.floor(((new Date().getTime() / 1000) - UTCSecond) / 60)
   if (pastMinute < 60) {
@@ -70,7 +63,7 @@ const ArticleCard = (props) => {
         <span>{by}</span>
         <span>{getPastTime(time)}</span>
       </div>
-      {url ? (<div><a href={url} target="_blank" rel="noopener noreferrer">{capture80Chars(url)}</a></div>) : null }
+      {url ? (<div className="article-url"><a href={url} target="_blank" rel="noopener noreferrer">{url}</a></div>) : null }
     </div>
   )
 }

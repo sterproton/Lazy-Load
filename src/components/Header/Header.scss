@@ -2,16 +2,26 @@
   background-color: rgb(255, 102, 0);
   position: fixed;
   width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: start;
+  align-items: center;
 }
 
 .block-wrap{
+  flex-grow: 1;
   display: flex;
-  flex-flow: wrap;
+  flex-flow: row nowrap;
   justify-content: center;
+  align-items: center;
   a{
-    display: block;
+    text-align: center;
+    flex: 0.2;
+    display: inline-block;
     color: white;
-    padding: 0.9375rem;
+    padding: 1rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
     font-size: 1.5rem;
     &:hover{
       background-color: rgb(253, 129, 47);
@@ -19,10 +29,24 @@
   }
 }
 
-.header-img{
-  position: absolute;
-  height: 100%;
-  img{
-    height: 100%;
+@media screen and (max-width:476px) {
+  .header{
+    a{
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
   }
+}
+
+.active-header{
+  background-color: rgb(253, 129, 47);
+}
+
+.header-img{
+  margin-left: 1.25rem;
+  height: 40px;
+  img{
+    width: 40px;
+  }
+  
 }
