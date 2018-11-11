@@ -207,7 +207,10 @@
       "node_modules/react-router/es/withRouter.js": 73,
       "node_modules/react-router/node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js": 74,
       "node_modules/babel-loader/lib/index.js!node_modules/eslint-loader/index.js!src/index.jsx 8384fed0d5982c85b63bd3af860aa68c": 14,
-      "node_modules/react-router-dom/es/Route.js 4408cd7dc11b15987dd8c8b79f285309": 25
+      "node_modules/react-router-dom/es/Route.js 4408cd7dc11b15987dd8c8b79f285309": 25,
+      "node_modules/react-router-dom/es/HashRouter.js db91cb532b2bd9b566f76559855f64cf": 52,
+      "node_modules/react-router-dom/es/NavLink.js c434b232f9d57f42ace6fe0904190da8": 53,
+      "node_modules/react-router-dom/es/BrowserRouter.js": 54
     },
     "usedIds": {
       "0": 0,
